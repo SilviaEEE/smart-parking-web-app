@@ -21,14 +21,14 @@ void loop(){
   if (val == HIGH) {            // check if the input is HIGH
     if (pirState == LOW) {
       // we have just turned on
-      Serial.println("Motion detected!");
+      Serial.println("'id':'spot1', 'latitude':'51.523518', 'longitude':'-0.130158', 'type':'free'");
       // We only want to print on the output change, not state
       pirState = HIGH;
     }
   } else {
     if (pirState == HIGH){
       // we have just turned of
-      Serial.println("Motion ended!");
+      Serial.println("'id':'spot1', 'latitude':'51.523518', 'longitude':'-0.130158', 'type':'occupied'");
       // We only want to print on the output change, not state
       pirState = LOW;
     }
