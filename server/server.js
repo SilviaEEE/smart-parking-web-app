@@ -70,7 +70,6 @@ io.on('connection', function(socket){
   console.log('a user connected');
 
   socket.on('mapLoaded', function() {
-    console.log('MAP is Loaded', socket);
   
     socket.emit('data', JSON.stringify(toArray(parkings)));
 
@@ -127,10 +126,8 @@ var parkings = {
 }
 
 
-function updateParkings(data) {
-  var parsedData = JSON.parse(data);
-
-  parking[`${parsedData.lng}+${parsedData.lat}`] = parsedData;
+function updateParkings(parsedData) {
+  parkings[`${parsedData.lng}+${parsedData.lat}`] = parsedData;
 }
 
 // setTimeout(() => {
@@ -148,16 +145,19 @@ function updateParkings(data) {
 
 sp.on('data', function(data) {
   // concatenating the string buffers sent via usb port
-  arduinoMessage += buffer.toString();
-
+  arduinoMessage += data.toString();
+    console.log(arduinoMessage);
   // detecting the end of the string
   if (arduinoMessage.indexOf('\r') >= 0) {
     // log the message into the terminal
     // console.log(arduinoMessage);
     // send the message to the client
-    updateParkings(arduinoMessage);
+    arduinoMessage=arduinoMessage.replace(/'/g, '"');
+    console.log(arduinoMessage);
+    var parsedData = JSON.parse(arduinoMessage);
+    updateParkings(parsedData);
 
-    io.emit('data', arduinoMessage);
+    io.emit('data', JSON.stringify([parsedData]));
     // reset the output string to an empty value
     arduinoMessage = '';
   }
