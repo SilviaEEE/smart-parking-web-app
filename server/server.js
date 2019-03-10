@@ -151,21 +151,18 @@ sp.on('data', function(data) {
     console.log(arduinoMessage);
   // detecting the end of the string
   if (arduinoMessage.indexOf('\r') >= 0) {
-    // log the message into the terminal
-    // console.log(arduinoMessage);
-    // send the message to the client
     arduinoMessage=arduinoMessage.replace(/'/g, '"');
-    console.log(arduinoMessage);
+    console.log('arduino message => ', arduinoMessage);
     var parsedData = JSON.parse(arduinoMessage);
 
-    updateParkings(parsedData);
+    // updateParkings(parsedData);
     
     axios.post('https://smart-parking-ucl.appspot.com/arduinos', parsedData)
     .then(function (response) {
-      console.log('sent')
+      console.log('sent to smart-parking.')
     })
     .catch(function (error) {
-      console.log(error);
+      console.log('error',error);
     });  
   }
 });
