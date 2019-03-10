@@ -4,6 +4,7 @@
   "description": "Simple example to show how to use arduino to send digital signals to a nodejs server",
   "main": "server.js",
   "dependencies": {
+    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "serialport": "7.1.4",

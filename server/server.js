@@ -1,3 +1,5 @@
+var axios = require('axios');
+
 var app = require('http').createServer(handler),
   io = require('socket.io').listen(app),
   fs = require('fs'),
@@ -9,7 +11,6 @@ var app = require('http').createServer(handler),
     baudRate: 9600
   }, true),
   // this var will contain the message string dispatched by arduino
-  arduinoMessage = '';
   /**
    * helper function to load any app file required by client.html
    * @param  { String } pathname: path of the file requested to the nodejs server
@@ -144,6 +145,7 @@ function updateParkings(parsedData) {
 
 
 sp.on('data', function(data) {
+  let arduinoMessage = '';
   // concatenating the string buffers sent via usb port
   arduinoMessage += data.toString();
     console.log(arduinoMessage);
@@ -155,11 +157,16 @@ sp.on('data', function(data) {
     arduinoMessage=arduinoMessage.replace(/'/g, '"');
     console.log(arduinoMessage);
     var parsedData = JSON.parse(arduinoMessage);
-    updateParkings(parsedData);
 
-    io.emit('data', JSON.stringify([parsedData]));
-    // reset the output string to an empty value
-    arduinoMessage = '';
+    updateParkings(parsedData);
+    
+    axios.post('https://smart-parking-ucl.appspot.com/arduinos', parsedData)
+    .then(function (response) {
+      console.log('sent')
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
   }
 });
 
