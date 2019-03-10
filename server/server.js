@@ -178,7 +178,9 @@ sp.on('open', function() {
 });
 
 // creating the server ( localhost:8000 )
-app.listen(8000);
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT);
 // server handler
 function handler(req, res) {
   readFile(url.parse(req.url).pathname, res);

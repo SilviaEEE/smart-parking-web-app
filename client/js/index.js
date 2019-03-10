@@ -1,7 +1,9 @@
 var map;
 var isMapInitialized = false;
 
-var socket = io.connect('http://localhost:8000');
+const host = 'https://smart-parking-ucl.appspot.com'
+// const host = 'http://localhost:8000'
+var socket = io.connect(host);
 
 var iconBase = 'https://drive.google.com/uc?id=';
 var icons = {
@@ -35,6 +37,8 @@ function addMarker(parkingSpot) {
             map: map
         })
     } 
+
+    console.log('marker', parkingSpot.lat + '+' +parkingSpot.lng, 'added')
 }
 
 
@@ -46,7 +50,7 @@ function initMap() {
     });
 
     isMapInitialized = true;
-
+    console.log('map is loaded')
     socket.emit('mapLoaded');
 }
 
