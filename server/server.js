@@ -143,9 +143,8 @@ function updateParkings(parsedData) {
 //   io.emit('data', JSON.stringify(temp))
 // }, 5000);
 
-
+let arduinoMessage = '';
 sp.on('data', function(data) {
-  let arduinoMessage = '';
   // concatenating the string buffers sent via usb port
   arduinoMessage += data.toString();
     console.log(arduinoMessage);
@@ -156,13 +155,16 @@ sp.on('data', function(data) {
     var parsedData = JSON.parse(arduinoMessage);
 
     // updateParkings(parsedData);
-    
-    axios.post('https://smart-parking-ucl.appspot.com/arduinos', parsedData)
+    var request = {
+    arduinos: [parsedData]
+    }
+    axios.post('https://smart-parking-ucl.appspot.com/arduinos', request)
     .then(function (response) {
       console.log('sent to smart-parking.')
+      arduinoMessage='';
     })
     .catch(function (error) {
-      console.log('error',error);
+      console.log('error');
     });  
   }
 });
