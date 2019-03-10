@@ -59,6 +59,7 @@ socket.on('data', (data) => {
     console.log(data);
 
     data = JSON.parse(data);
+    console.log(data)
     data.forEach(parking => {
         addMarker(parking);
     })
