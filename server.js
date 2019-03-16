@@ -1,8 +1,8 @@
 var express = require('express');
-var app = express();
-var http = require('http').createServer(app)
-var io = require('socket.io')(http);
-const path = require('path');
+var app = express();//express variable
+var http = require('http').createServer(app) //create server based on express app
+var io = require('socket.io')(http); //open socket
+const path = require('path'); 
 var bodyParser = require('body-parser')
 const PORT = process.env.PORT || 8000;
 
@@ -26,7 +26,7 @@ app.post('/arduinos', (req, res) => {
     updateParkings(arduino)
   })
 
-  io.emit('data', JSON.stringify(updatedPoints));
+  io.emit('data', JSON.stringify(updatedPoints)); //sends to all clients currently connected
   res.writeHead(200);
   res.send();
 });
@@ -127,6 +127,7 @@ function toArray (obj) {
   return Object.values(obj);
 }
 
+//data, should be in a database in practice
 var parkings = {
   "-0.130158+51.523518": {
     type: 'free',

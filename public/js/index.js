@@ -1,19 +1,20 @@
 var map;
 var isMapInitialized = false;
 
-const host = 'https://smart-parking-ucl.appspot.com'
-// const host = 'http://localhost:8000'
+const host = 'https://smart-parking-ucl.appspot.com' //app hosted in cloud
+//const host = 'http://localhost:8000'  //can test in localhost
 var socket = io.connect(host);
 
+//images
 var iconBase = 'https://drive.google.com/uc?id=';
 var icons = {
     free: {
         name: 'Free',
-        icon: iconBase + '1QPAnX97AQF6T-n0o1_gPWCBCIAtrwaud'
+        icon: iconBase + '1vtEmw-INR9NX6ssoFTlgnzk5t85YYy5g'
     },
     occupied: {
         name: 'Occupied',
-        icon: iconBase + '1bFDrMwPfs0EjfxXbgtTpVCEzeR1wfqyJ'
+        icon: iconBase + '1EjPtpjvCr5wHTeduQmpTA_R68xvQGNAW'
     }
 }
 
@@ -25,7 +26,7 @@ function addMarker(parkingSpot) {
     if (markers[parkingSpot.lat + '+' +parkingSpot.lng]) {
         markers[parkingSpot.lat + '+' +parkingSpot.lng].marker.setMap(null)
     }
-
+    //creates the marker at position
     markers[parkingSpot.lat + '+' +parkingSpot.lng] = {
         type: parkingSpot.type,
         marker: new google.maps.Marker({
@@ -37,12 +38,13 @@ function addMarker(parkingSpot) {
             map: map
         })
     } 
+    console.log(markers)
 
     console.log('marker', parkingSpot.lat + '+' +parkingSpot.lng, 'added')
 }
 
 
-
+//function to load map
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: 51.523285, lng: -0.1298344},
@@ -55,7 +57,7 @@ function initMap() {
 }
 
 // when we receive data
-socket.on('data', (data) => {
+socket.on('data', (data) => {  
     console.log(data);
 
     data = JSON.parse(data);
