@@ -1,4 +1,5 @@
-const HOST = 'https://smart-parking-ucl.appspot.com/arduinos'
+//const HOST = 'https://smart-parking-ucl.appspot.com/arduinos'
+const HOST = 'http://localhost:8000/arduinos'
 var axios = require('axios');
 var app = require('http').createServer(),
   SerialPort = require('serialport');

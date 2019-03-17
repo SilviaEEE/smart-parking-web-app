@@ -1,8 +1,8 @@
 var map;
 var isMapInitialized = false;
 
-const host = 'https://smart-parking-ucl.appspot.com' //app hosted in cloud
-//const host = 'http://localhost:8000'  //can test in localhost
+//const host = 'https://smart-parking-ucl.appspot.com' //app hosted in cloud
+const host = 'http://localhost:8000'  //can test in localhost
 var socket = io.connect(host);
 
 //images
@@ -38,8 +38,6 @@ function addMarker(parkingSpot) {
             map: map
         })
     } 
-    console.log(markers)
-
     console.log('marker', parkingSpot.lat + '+' +parkingSpot.lng, 'added')
 }
 
@@ -58,103 +56,8 @@ function initMap() {
 
 // when we receive data
 socket.on('data', (data) => {  
-    console.log(data);
-
     data = JSON.parse(data);
-    console.log(data)
     data.forEach(parking => {
         addMarker(parking);
     })
 });
-
-// if (isMapInitialized) {
-//     var parkings = [
-//         {
-//             type: 'free',
-//             lat: 51.523518,
-//             lng: -0.130158
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523495,
-//             lng: -0.130137
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523467,
-//             lng: -0.130117
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523452,
-//             lng: -0.130087
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523427,
-//             lng: -0.130068
-//         }
-//     ]
-
-//     parkings.forEach(parking => {
-//         console.log(parking)
-//         addMarker(parking);
-//     })
-// } else {
-//     console.log('map not initilized')
-// }
-
-// setTimeout(() => {
-//    if (isMapInitialized) {
-//     var parkings = [
-//         {
-//             type: 'free',
-//             lat: 51.523518,
-//             lng: -0.130158
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523495,
-//             lng: -0.130137
-//         },
-//         {
-//             type: 'occupied',
-//             lat: 51.523467,
-//             lng: -0.130117
-//         },
-//         {
-//             type: 'occupied',
-//             lat: 51.523452,
-//             lng: -0.130087
-//         },
-//         {
-//             type: 'free',
-//             lat: 51.523427,
-//             lng: -0.130068
-//         }
-//     ]
-
-//     parkings.forEach(parking => {
-//         console.log(parking)
-//         addMarker(parking);
-//     })
-//    } else {
-//        console.log('map not initilized')
-//    }
-// }, 3000)
-
-// setTimeout(() => {
-//     let parking = {
-//         type: 'occupied',
-//         lat: 51.523427,
-//         lng: -0.130068
-//     }
-    
-//     addMarker(parking);
-
-//     console.log(markers)
-// }, 10000)
-
-
-
-

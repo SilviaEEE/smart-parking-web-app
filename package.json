@@ -1,13 +1,13 @@
 {
-  "name": "nodejs-arduino-example",
-  "version": "0.0.2",
-  "description": "Simple example to show how to use arduino to send digital signals to a nodejs server",
+  "name": "smart-parking-ucl",
+  "version": "0.0.1",
+  "description": "Web application that shows live parking data from an Arduino in Google Maps",
   "main": "server.js",
   "dependencies": {
     "axios": "^0.18.0",
+    "serialport": "7.1.4",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "serialport": "7.1.4",
     "socket.io": "^2.2.0"
   },
   "devDependencies": {},
@@ -17,12 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/GianlucaGuarini/nodejs-arduino-example.git"
+    "url": "https://github.com/SilviaEEE/smart-parking-web-app"
   },
-  "author": "Gianluca Guarini",
+  "author": "Silvia Rodriguez",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/GianlucaGuarini/nodejs-arduino-example/issues"
+    "url": "https://github.com/SilviaEEE/smart-parking-web-app"
   },
-  "homepage": "https://github.com/GianlucaGuarini/nodejs-arduino-example"
+  "homepage": "https://smart-parking-ucl.appspot.com/"
 }
